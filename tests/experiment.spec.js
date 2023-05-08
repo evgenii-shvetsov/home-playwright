@@ -70,10 +70,3 @@ test.describe("FSP demo", () => {
 
 
 
-// //  await page.goto('https://home-hi1b.onrender.com/');
-//   await page.getByRole('button', { name: 'Log In' }).click();
-//   await page.getByPlaceholder('Enter username or email').click();
-//   await page.getByPlaceholder('Enter username or email').fill('demo-user');
-//   await page.getByPlaceholder('Enter password').click();
-//   await page.getByPlaceholder('Enter password').fill('demo-password');
-//   await page.locator('#modal-content').getByRole('button', { name: 'Log In' }).click();

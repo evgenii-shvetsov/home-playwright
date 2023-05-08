@@ -1,5 +1,7 @@
 import { test, expect, chromium } from "@playwright/test";
 
+import LoginDemoUser from '../pages/login'
+
 test("FSP demo", async () => {
   const browser = await chromium.launch({ slowMo: 500, headless: false });
 
@@ -12,12 +14,15 @@ test("FSP demo", async () => {
 
   const page = await context.newPage();
 
+  const Login = new LoginDemoUser(page);
   await page.pause();
-  await page.goto("https://home-hi1b.onrender.com/");
+//   await page.goto("https://home-hi1b.onrender.com/");
 
   // login user
-  await page.getByRole("button", { name: "Log In" }).click();
-  await page.getByRole("button", { name: "Demo Login" }).click();
+  await Login.gotoLoginModal();
+  await Login.login("demo-user", "demo-password");
+//   await page.getByRole("button", { name: "Log In" }).click();
+//   await page.getByRole("button", { name: "Demo Login" }).click();
 
   // assertion for correct email after login
   await page.getByRole("button", { name: "" }).click();
