@@ -10,7 +10,7 @@ test.beforeAll(async () => {
   page = await context.newPage();
   await page.goto("https://home-hi1b.onrender.com/");
 
-  // Login to the website
+  // Demo user login
   await page.getByRole("button", { name: "Log In" }).click();
   await page.getByRole("button", { name: "Demo Login" }).click();
 });
@@ -21,34 +21,26 @@ test.afterAll(async () => {
 });
 
 test.describe("FSP demo", () => {
-  test("Assertion for correct email after login", async () => {
-
+  test("Test 1: Assertion for correct email after login", async () => {
     await page.getByRole("button", { name: "" }).click();
-
     const emailElement = page.locator("ul.profile-dropdown li:nth-child(2)");
-    
     await expect(emailElement).toHaveText("demo-user@mail.com");
   });
 
-  test("Assertion for correct input into the search bar", async () => {
+  test("Test 2: Assertion for correct output from the search bar", async () => {
     await page.getByPlaceholder("Enter a Home Type or ZIP code").click();
-
     await page
       .getByPlaceholder("Enter a Home Type or ZIP code")
       .fill("apartment");
-
     await page.getByPlaceholder("Enter a Home Type or ZIP code").press("Enter");
-
     const apartmentHeader = page.locator("h4");
-
     await expect(apartmentHeader).toHaveText(
       'Real Estate & Homes, based on your search " apartment "'
     );
   });
 
-  test("Assertion for correct address of the apartment", async () => {
+  test("Test 3: Correct address of the apartment", async () => {
     await page.getByPlaceholder("Enter a Home Type or ZIP code").click();
-    
     await page
       .getByPlaceholder("Enter a Home Type or ZIP code")
       .fill("apartment");
@@ -74,3 +66,14 @@ test.describe("FSP demo", () => {
   //     );
   //   });
 });
+
+
+
+
+// //  await page.goto('https://home-hi1b.onrender.com/');
+//   await page.getByRole('button', { name: 'Log In' }).click();
+//   await page.getByPlaceholder('Enter username or email').click();
+//   await page.getByPlaceholder('Enter username or email').fill('demo-user');
+//   await page.getByPlaceholder('Enter password').click();
+//   await page.getByPlaceholder('Enter password').fill('demo-password');
+//   await page.locator('#modal-content').getByRole('button', { name: 'Log In' }).click();

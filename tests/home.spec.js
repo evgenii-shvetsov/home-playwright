@@ -37,13 +37,13 @@ test("FSP demo", async () => {
 
   // assertion for specific apartment address
   await page
-    .locator("div:nth-child(8) > .location-marker > .listing-icon")
+    .locator("div:nth-child(1) > .location-marker > .listing-icon")
     .hover();
   await page
-    .locator("div:nth-child(8) > .location-marker > .listing-icon")
+    .locator("div:nth-child(1) > .location-marker > .listing-icon")
     .click();
   const address = page.locator('#listing-location');
-  await expect(address).toHaveText("690 Market St,  San Francisco,  CA 94104")
+  await expect(address).toHaveText("301 Main St,  San Francisco,  CA 94105");
 
   // add check for switching from "save" to "saved" and check for red heart
   await page.getByRole("button", { name: " Save" }).click();
