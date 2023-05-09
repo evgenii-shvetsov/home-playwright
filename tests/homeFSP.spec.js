@@ -54,7 +54,7 @@ test("Home - Full Stack Project with sequential automated Playwright tests", asy
   });
   await resetAppState();
 
-  await test.step("Test 3: Check for the spicific listing details and 'saving' functionality", async () => {
+  await test.step("Test 3: Check for the specific listing details and 'saving' functionality", async () => {
     searchForApartments();
     const locator = page.locator(
       "div:nth-child(6) > .location-marker > .listing-icon"
