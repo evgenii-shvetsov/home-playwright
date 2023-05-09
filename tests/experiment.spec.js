@@ -8,6 +8,14 @@ test.beforeAll(async () => {
   browser = await chromium.launch({ slowMo: 500, headless: false });
   context = await browser.newContext();
   page = await context.newPage();
+//   await page.goto("https://home-hi1b.onrender.com/");
+
+//   // Demo user login
+//   await page.getByRole("button", { name: "Log In" }).click();
+//   await page.getByRole("button", { name: "Demo Login" }).click();
+});
+
+test.beforeEach(async () => {
   await page.goto("https://home-hi1b.onrender.com/");
 
   // Demo user login
@@ -37,25 +45,34 @@ test.describe("FSP demo", () => {
     await expect(apartmentHeader).toHaveText(
       'Real Estate & Homes, based on your search " apartment "'
     );
+    
   });
 
   test("Test 3: Correct address of the apartment", async () => {
+    // await page.pause();
     await page.getByPlaceholder("Enter a Home Type or ZIP code").click();
     await page
       .getByPlaceholder("Enter a Home Type or ZIP code")
       .fill("apartment");
     await page.getByPlaceholder("Enter a Home Type or ZIP code").press("Enter");
 
+    // Questionable part
+    await page.waitForSelector(
+      "div:nth-child(12) > .location-marker > .listing-icon"
+    );
+
     await page
-      .locator("div:nth-child(1) > .location-marker > .listing-icon")
+      .locator("div:nth-child(12) > .location-marker > .listing-icon")
       .hover();
 
     await page
-      .locator("div:nth-child(1) > .location-marker > .listing-icon")
+      .locator("div:nth-child(12) > .location-marker > .listing-icon")
       .click();
     const address = page.locator("#listing-location");
 
-    await expect(address).toHaveText("301 Main St,  San Francisco,  CA 94105");
+    await expect(address).toHaveText(
+      "301 Mission St,  San Francisco,  CA 94105"
+    );
   });
 
   //   test("Add check for switching from save to saved and check for red heart", async () => {
@@ -70,3 +87,8 @@ test.describe("FSP demo", () => {
 
 
 
+{/* <section class="listing-detail">
+  <h2>$4,236</h2>
+  <div>2 bds | &nbsp;2 ba | &nbsp;817 sqft | &nbsp; For rent</div>
+  <div>1145 Harrison St, &nbsp;San Francisco, &nbsp;CA&nbsp;94103</div>
+</section>; */}
