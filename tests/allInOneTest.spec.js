@@ -5,22 +5,21 @@ import LoginDemoUser from "../pages/login";
 test("All in one test", async () => {
   const browser = await chromium.launch({ slowMo: 700, headless: false });
 
-  const context = await browser.newContext(/*{
+  const context = await browser.newContext({
     recordVideo: {
       dir: "./videos",
       size: { width: 1280, height: 720 },
     },
-  }*/);
+  });
 
   const page = await context.newPage();
 
-  // login user
-  await page.pause();
+  // login user using separate Login class
   const Login = new LoginDemoUser(page);
   await Login.gotoLoginModal();
   await Login.login("demo-user", "demo-password");
 
-  // assertion for correct email after login
+  // check for correct email after login
   await page.getByRole("button", { name: "" }).click();
   const emailElement = page.locator("ul.profile-dropdown li:nth-child(2)");
   await expect(emailElement).toHaveText("demo-user@mail.com");
@@ -56,11 +55,24 @@ test("All in one test", async () => {
     page.locator("button.show-page-font-awesome-favorite")
   ).toHaveText("Saved");
 
+  // testing user profile area
+  // assertion for correct heading on the user profile page
   await page.getByRole("button", { name: "" }).click();
   await page.getByRole("button", { name: "Manage Account" }).click();
+  await expect(
+    page.locator('h4:has-text("Welcome Home, demo-user !")')
+  ).toBeVisible();
+
+  //remove the listing from the favorites section
   await page.getByRole("button", { name: "" }).click();
+  await expect(
+    page.locator('div:has-text("301 Mission St, San Francisco, CA 94105")')
+  ).not.toBeVisible();
+
+  //logout demo user and redirect to the main page
   await page.getByRole("button", { name: "" }).click();
   await page.getByRole("button", { name: "Log Out" }).click();
+  expect(page.url()).toEqual("https://home-hi1b.onrender.com/");
 
   await context.close();
   await browser.close();
