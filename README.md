@@ -1,4 +1,5 @@
-![playwright-demo](https://github.com/evgenii-shvetsov/home-playwright/assets/46214277/0d37ff40-40e7-49c6-b23a-911732ad7380)
+![playwright-demo](https://github.com/evgenii-shvetsov/home-playwright/assets/46214277/afd5b4a9-3d65-4bc1-ba7f-4e7aac9c844f)
+
 
 # Home - Full Stack Project with sequential automated Playwright tests
 
@@ -48,8 +49,9 @@ class LoginDemoUser {
 export default LoginDemoUser;
 ```
 
+## Playwright report
 
-
+![playwright-report](https://github.com/evgenii-shvetsov/home-playwright/assets/46214277/91f40cdb-2b8e-44dc-84b0-09dea2543c9a)
 
 
 
