@@ -19,7 +19,7 @@ To run specific test:
 npx playwright test ./tests/homeFSP.spec.js     
 ```
 
-
+## Code Snippets
 #### Login DemoUser Class
 ```javascript
 
