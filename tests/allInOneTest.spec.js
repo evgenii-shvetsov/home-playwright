@@ -3,7 +3,7 @@ import { test, expect, chromium, webkit } from "@playwright/test";
 import LoginDemoUser from "../pages/login";
 
 test("All in one test", async () => {
-  const browser = await chromium.launch({ slowMo: 700, headless: false });
+  const browser = await chromium.launch({ slowMo: 500, headless: false });
 
   const context = await browser.newContext({
     recordVideo: {
